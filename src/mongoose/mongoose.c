@@ -10548,6 +10548,16 @@ void *mg_start_thread(void *(*f)(void *), void *p) {
   return (void *) CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE) f, p, 0, NULL);
 #elif defined(_WIN32)
   return (void *) _beginthread((void(__cdecl *) (void *) ) f, 0, p);
+#elif defined(__MS_RTOS__)
+  ms_handle_t tid;
+  ms_size_t stk_size;
+#if defined(MG_STACK_SIZE) && MG_STACK_SIZE > 1
+  stk_size = MG_STACK_SIZE;
+#else
+  stk_size = 4096;
+#endif
+  ms_thread_create("t_mg", (ms_thread_entry_t)f, p, stk_size, 9, 0, 0, &tid);
+  return (void *)tid;
 #else
   pthread_t thread_id = (pthread_t) 0;
   pthread_attr_t attr;
