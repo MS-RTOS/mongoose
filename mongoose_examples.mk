@@ -33,7 +33,10 @@ LOCAL_TARGET_NAME := mongoose_examples
 # Source list
 #*********************************************************************************************************
 LOCAL_SRCS := \
-src/mongoose/examples/simplest_web_server/simplest_web_server.c
+src/mongoose/examples/simplest_web_server/simplest_web_server.c \
+src/mongoose/examples/coap_client/coap_client.c \
+src/mongoose/examples/coap_server/coap_server.c \
+src/mongoose/examples/mqtt_client/mqtt_client.c
 
 #*********************************************************************************************************
 # Header file search path (eg. LOCAL_INC_PATH := -I"Your header files search path")
@@ -44,7 +47,27 @@ LOCAL_INC_PATH := \
 #*********************************************************************************************************
 # Pre-defined macro (eg. -DYOUR_MARCO=1)
 #*********************************************************************************************************
-LOCAL_DSYMBOL := 
+LOCAL_DSYMBOL := \
+-DMG_LWIP=1 \
+-DMG_ENABLE_SSL=0 \
+-DMG_ENABLE_IPV6=0 \
+-DMG_ENABLE_MQTT=1  \
+-DMG_ENABLE_MQTT_BROKER=1  \
+-DMG_ENABLE_DNS_SERVER=1  \
+-DMG_ENABLE_COAP=1  \
+-DMG_ENABLE_HTTP=1 \
+-DMG_ENABLE_HTTP_CGI=0 \
+-DMG_ENABLE_HTTP_SSI=1 \
+-DMG_ENABLE_HTTP_SSI_EXEC=0 \
+-DMG_ENABLE_HTTP_WEBDAV=1 \
+-DMG_ENABLE_HTTP_WEBSOCKET=1 \
+-DMG_ENABLE_BROADCAST=1 \
+-DMG_ENABLE_GETADDRINFO=1 \
+-DMG_ENABLE_THREADS=1 \
+-DMG_DISABLE_HTTP_DIGEST_AUTH=1 \
+-DCS_DISABLE_SHA1=0 \
+-DCS_DISABLE_MD5=0 \
+-DMG_DISABLE_HTTP_KEEP_ALIVE=1
 
 #*********************************************************************************************************
 # Compiler flags
